@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 
-import com.hotfix.tool.HotFix;
+import com.hotfix.tool.HotFix2;
 
 import androidx.annotation.Nullable;
 
@@ -34,7 +32,7 @@ public class SplashActivity extends Activity {
 
     private void startHotFix() {
         String fixFilePath = "/sdcard/hotfix/fix.dex";
-        HotFix.fixDexFile(this, fixFilePath);
+        HotFix2.fixDexFile(this, fixFilePath);
         findViewById(R.id.welcomeIcon).postDelayed(new Runnable() {
             @Override
             public void run() {

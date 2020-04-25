@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import dalvik.system.DexClassLoader;
 import dalvik.system.PathClassLoader;
 
-public class HotFix {
+public class HotFix2 {
     /**
      * 修复指定的类
      *
@@ -118,5 +118,4 @@ public class HotFix {
         }
         return newInstance;
     }
-
 }
