@@ -1,0 +1,2 @@
+rootProject.name='AndroidHotFix'
+include ':app'
