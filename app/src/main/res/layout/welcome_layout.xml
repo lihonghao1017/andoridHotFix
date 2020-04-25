@@ -6,17 +6,16 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/fixIcon"
+        android:id="@+id/welcomeIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/fixicon" />
+        android:src="@drawable/wel" />
 
     <TextView
-        android:id="@+id/fixText"
+        android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="修复漂亮"
-        android:textSize="20dp"
+        android:text="欢迎来到我们的世界"
         android:textColor="@android:color/holo_blue_dark" />
 
 </LinearLayout>
