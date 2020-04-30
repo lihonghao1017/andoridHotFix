@@ -4,15 +4,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 
+import com.example.admin.gamedemo.AuxiliaryService;
+import com.gbits.atm.leiting.R;
 import com.hotfix.tool.HotFix2;
 
-import androidx.annotation.Nullable;
 
 public class SplashActivity extends Activity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_layout);
         requestPemmision();
@@ -33,6 +37,12 @@ public class SplashActivity extends Activity {
     private void startHotFix() {
         String fixFilePath = "/sdcard/hotfix/fix.dex";
         HotFix2.fixDexFile(this, fixFilePath);
+
+        requestOverlayPermission();
+
+    }
+    private void startSear(){
+        startService(new Intent(this, AuxiliaryService.class));
         findViewById(R.id.welcomeIcon).postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -40,9 +50,28 @@ public class SplashActivity extends Activity {
             }
         }, 3000);
     }
+    private void requestOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, 0x303);
+            } else {
+                startSear();
+            }
+        }
+    }
     private void startMian(){
         startActivity(new Intent(this,MainActivity.class));
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0x303){
+            startSear();
+        }
     }
 
     @Override

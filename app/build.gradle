@@ -1,13 +1,13 @@
-apply plugin: 'com.android.library'
-apply plugin : 'maven'
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+apply plugin: 'com.android.application'
+//apply plugin : 'maven'
+//tasks.withType(JavaCompile) {
+//    options.encoding = "UTF-8"
+//}
 android {
     compileSdkVersion 28
     defaultConfig {
-//        applicationId "com.example.androidhotfix"
-        minSdkVersion 23
+        applicationId "com.example.androidhotfix"
+        minSdkVersion 26
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -21,26 +21,33 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets']
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.shark:screencapture:1.0.0'
+    implementation 'com.rmtheis:tess-two:9.1.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
-uploadArchives{
-    repositories.mavenDeployer {
-        def mavenRepositoryPath = file(getProperty('aar.hotfix'))
-        repository(url: "file://${mavenRepositoryPath.absolutePath}")
-        pom.project{
-            groupId "com.lihh.hotfix"
-            artifactId "hotfix"
-            version 1.1
-        }
-    }
-}
+//uploadArchives{
+//    repositories.mavenDeployer {
+//        def mavenRepositoryPath = file(getProperty('aar.hotfix'))
+//        repository(url: "file://${mavenRepositoryPath.absolutePath}")
+//        pom.project{
+//            groupId "com.lihh.hotfix"
+//            artifactId "hotfix"
+//            version 1.1
+//        }
+//    }
+//}
